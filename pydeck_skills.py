@@ -2,26 +2,24 @@ import pydeck as pdk
 import pandas as pd
 import streamlit as st
 import json
-import os
+from pathlib import Path
 
-# ------------------------
-# Path to skills.json
-# ------------------------
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SKILLS_FILE = os.path.join(BASE_DIR, "data", "skills.json")
+# Resolve path relative to THIS file
+BASE_DIR = Path(__file__).resolve().parent.parent  # points to samuel_ekisa_portfolio/
+SKILLS_FILE = BASE_DIR / "data" / "skills.json"
 
-# ------------------------
-# Load skills into DataFrame
-# ------------------------
 def load_skills():
-    with open(SKILLS_FILE) as f:
+    if not SKILLS_FILE.exists():
+        st.error(f"Skills file not found at: {SKILLS_FILE}")
+        return pd.DataFrame()  # return empty DataFrame to avoid crash
+    with SKILLS_FILE.open() as f:
         return pd.DataFrame(json.load(f))
 
-# ------------------------
-# Render 3D Skill Map
-# ------------------------
 def render_skill_map():
     skills = load_skills()
+    if skills.empty:
+        st.info("No skills data to display.")
+        return
 
     layer = pdk.Layer(
         "ColumnLayer",
@@ -33,18 +31,10 @@ def render_skill_map():
         pickable=True,
         auto_highlight=True,
     )
-
-    view_state = pdk.ViewState(
-        latitude=20,
-        longitude=20,
-        zoom=1,
-        pitch=45
-    )
-
-    r = pdk.Deck(
+    view_state = pdk.ViewState(latitude=20, longitude=20, zoom=1, pitch=45)
+    deck = pdk.Deck(
         layers=[layer],
         initial_view_state=view_state,
         tooltip={"text": "{Skill}: {Proficiency}%"}
     )
-
-    st.pydeck_chart(r)
+    st.pydeck_chart(deck)

@@ -10,23 +10,19 @@ def animated_intro():
     displayed = ""
     for char in text:
         displayed += char
-        placeholder.markdown(f'<h3 style="text-align:center">{displayed}</h3>', unsafe_allow_html=True)
+        placeholder.markdown(f'<h2 style="text-align:center; margin-top:50px;">{displayed}</h2>', unsafe_allow_html=True)
         time.sleep(0.05)
 
 # -----------------------
-# CTA Buttons with Smooth Scroll
+# CTA Buttons (functional)
 # -----------------------
 def cta_buttons():
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2, gap="large")
     with col1:
-        st.markdown("""
-            <button onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'});">
-            View Projects
-            </button>
-        """, unsafe_allow_html=True)
+        if st.button(" My Work"):
+            st.session_state["section"] = "projects"
+            st.experimental_rerun()
     with col2:
-        st.markdown("""
-            <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'});">
-            Contact Me
-            </button>
-        """, unsafe_allow_html=True)
+        if st.button("Let's Connect"):
+            st.session_state["section"] = "contact"
+            st.experimental_rerun()
