@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Interactive Portfolio",
+        "description": "A fully interactive portfolio built with Python, Streamlit, and PyDeck showcasing skills, projects, and mini-games.",
+        "tech": ["Python", "Streamlit", "PyDeck", "HTML/CSS", "JavaScript"],
+        "screenshot": "assets/screenshot.jpg",
+        "github": "https://github.com/Kidotih/samuel_ekisa_portfolio"
+    }
+]
+

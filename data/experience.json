@@ -1,0 +1,17 @@
+[
+    {
+        "role": "Software Engineer",
+        "company": "TechCorp",
+        "start": "Jan 2022",
+        "end": "Present",
+        "description": "Worked on full-stack web development using Python and JavaScript."
+    },
+    {
+        "role": "Intern",
+        "company": "StartupX",
+        "start": "Jun 2021",
+        "end": "Dec 2021",
+        "description": "Assisted with data analysis and dashboard creation."
+    }
+]
+

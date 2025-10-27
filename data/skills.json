@@ -1,0 +1,27 @@
+[
+    {
+        "Skill": "Python",
+        "Proficiency": 95,
+        "lat": 10,
+        "lon": 20
+    },
+    {
+        "Skill": "Streamlit",
+        "Proficiency": 90,
+        "lat": 15,
+        "lon": 25
+    },
+    {
+        "Skill": "PyDeck",
+        "Proficiency": 85,
+        "lat": 20,
+        "lon": 30
+    },
+    {
+        "Skill": "JavaScript",
+        "Proficiency": 70,
+        "lat": 25,
+        "lon": 35
+    }
+]
+
