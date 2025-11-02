@@ -1,0 +1,7 @@
+[
+  {"name": "Python", "level": "Advanced"},
+  {"name": "JavaScript", "level": "Intermediate"},
+  {"name": "Streamlit", "level": "Advanced"},
+  {"name": "Supabase", "level": "Intermediate"},
+  {"name": "Automation", "level": "Expert"}
+]

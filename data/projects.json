@@ -1,0 +1,26 @@
+[
+  {
+    "name": "AI Chat Assistant",
+    "description": "A conversational AI chatbot built with Streamlit and Supabase for storing user sessions.",
+    "tech": ["Python", "Streamlit", "Supabase", "OpenAI"],
+    "category": "AI",
+    "screenshot": "images/ai_chat.png",
+    "github": "https://github.com/Kidotih/ai-chat-assistant"
+  },
+  {
+    "name": "Automation Hub",
+    "description": "Automates file organization and email reports — designed to save time.",
+    "tech": ["Python", "Automation", "APIs"],
+    "category": "Automation",
+    "screenshot": "images/automation_hub.png",
+    "github": "https://github.com/Kidotih/automation-hub"
+  },
+  {
+    "name": "Personal Portfolio",
+    "description": "The portfolio you’re viewing — built in Streamlit with animations and custom UI components.",
+    "tech": ["Streamlit", "CSS", "PyDeck"],
+    "category": "Web Apps",
+    "screenshot": "images/portfolio.png",
+    "github": "https://github.com/Kidotih/samuel_ekisa_portfolio"
+  }
+]

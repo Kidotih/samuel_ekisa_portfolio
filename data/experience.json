@@ -1,0 +1,23 @@
+[
+  {
+    "start": "Jan 2023",
+    "end": "Present",
+    "role": "Developer",
+    "company": "Awesome Tech",
+    "description": "Building amazing apps."
+  },
+  {
+    "start": "Jun 2022",
+    "end": "Dec 2022",
+    "role": "Intern",
+    "company": "Another Company",
+    "description": "Learning and contributing."
+  },
+  {
+    "start": "Jun 2022",
+    "end": "Dec 2022",
+    "role": "Intern",
+    "company": "Another Company",
+    "description": "Learning and contributing."
+  }
+]
