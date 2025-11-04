@@ -168,81 +168,99 @@ for i, skill in enumerate(skills):
         # Expandable description
         with st.expander("Learn more"):
             st.write(skill['description'])
-# Display skills in columns with expanders
-cols = st.columns(3)
-for i, skill in enumerate(skills):
-    with cols[i % 3]:
-        with st.expander(f"{skill['name']} ({skill['level']})"):
-            st.write(skill['description'])
-st.markdown("---")
 
 
 
+# MY WORK SECTION
 # -----------------------
-# My Work Section
-# -----------------------
+import streamlit as st
 
 st.markdown("---")
-st.header("My Work.")
-st.markdown("<br>", unsafe_allow_html=True)
+st.header("My Work 💼")
+st.write("I build systems that **automate**, **educate**, and **inspire** innovation.")
 
-if PROJECTS_FILE.exists():
-    with open(PROJECTS_FILE) as f:
-        projects = json.load(f)
-else:
-    projects = []
 
-# Gather categories for filter
-categories = ["All"] + sorted({p.get("category","Other") for p in projects})
-selected_category = st.selectbox("Filter by category", categories, key="projects_filter")
-
-# CSS for project cards
+# --- Styling ---
 st.markdown("""
 <style>
 .project-card {
-    background-color: #fff;
-    color: #000;
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
 }
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.15);
 }
-.project-title { font-weight:600; font-size:1.2rem; margin-bottom:0.3rem; }
-.project-tech { font-size:0.85rem; color:#555; margin-top:0.5rem; }
-.project-container { display:flex; flex-wrap:wrap; gap:1rem; }
-.project-img { max-width:300px; border-radius:10px; }
+.project-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #111;
+}
+.project-desc {
+    color: #555;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+.tech-stack {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.5rem;
+}
+.project-link a {
+    text-decoration: none;
+    color: #0078ff;
+    font-weight: 600;
+}
 </style>
 """, unsafe_allow_html=True)
 
-# Display projects in a flexible grid
-st.markdown('<div class="project-container">', unsafe_allow_html=True)
+# --- Work Showcase ---
+projects = [
+    {
+        "title": "Automation System Dashboard",
+        "desc": "A real-time Streamlit dashboard that automates workflows and reports for small businesses.",
+        "tech": "Python, Streamlit, Supabase, REST APIs",
+        "link": "https://github.com/Kidotih/automation-dashboard"
+    },
+    {
+        "title": "Learning Hub Platform",
+        "desc": "A digital platform that simplifies learning through structured modules and AI-based feedback.",
+        "tech": "React, FastAPI, PostgreSQL, OpenAI API",
+        "link": "https://github.com/Kidotih/learning-hub"
+    },
+    {
+        "title": "Portfolio & Blog System",
+        "desc": "A personal web system to document my projects, insights, and progress as a builder and educator.",
+        "tech": "Python, Streamlit, Markdown, GitHub Actions",
+        "link": "https://github.com/Kidotih/samuel_ekisa_portfolio"
+    }
+]
 
-for project in projects:
-    if selected_category != "All" and project.get("category","Other") != selected_category:
-        continue
-    
-    screenshot = BASE_DIR / project.get("screenshot","")
-    img_url = str(screenshot) if screenshot.exists() else "https://via.placeholder.com/300x200?text=No+Image"
-    
-    st.markdown(f"""
-    <div class="project-card">
-        <img src="{img_url}" class="project-img">
-        <div class="project-title">{project.get('name','Unnamed Project')}</div>
-        <div>{project.get('description','No description available.')}</div>
-        <div class="project-tech"><b>Tech:</b> {', '.join(project.get('tech',[]))}</div>
-        {f"<a href='{project['github']}' target='_blank'>🔗 View on GitHub</a>" if project.get('github') else ""}
-    </div>
-    """, unsafe_allow_html=True)
+cols = st.columns(3)
+for col, project in zip(cols, projects):
+    with col:
+        st.markdown(f"""
+        <div class="project-card">
+            <div class="project-title">{project['title']}</div>
+            <div class="project-desc">{project['desc']}</div>
+            <div class="tech-stack">🧠 {project['tech']}</div>
+            <div class="project-link" style="margin-top:10px;">
+                🔗 <a href="{project['link']}" target="_blank">View Project</a>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_allow_html=True)
+# Closing message
+st.markdown("""
+<div style="text-align:center; margin-top:3rem; font-size:1.1rem; color:#444;">
+✨ I build systems that <b>automate</b>, <b>educate</b>, and <b>inspire.</b>
+</div>
+""", unsafe_allow_html=True)
 
-
-# -----------------------
 # Interactive Mini-Demos Section (instead of games)
 # -----------------------
 st.header("Interactive Demos.")
@@ -279,6 +297,8 @@ st.markdown("---")
 
 # -----------------------
 # Analytics Section
+
+
 # -----------------------
 
 
@@ -293,7 +313,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 stats = [
     {"label": "Projects Completed", "value": 12, "icon": "📁"},
     {"label": "Languages Known", "value": 5, "icon": "📝"},
-    {"label": "GitHub Commits", "value": 250, "icon": "💻"},
+    {"label": "GitHub Commits", "value": 20, "icon": "💻"},
 ]
 
 # Create columns dynamically
@@ -347,30 +367,94 @@ for placeholder, target_value, icon, label in placeholders:
 
 
 # -----------------------
-st.header("Let's Connect..")
-chatbot()
-st.text_input("Your Name", key="contact_name")
-st.text_input("Your Email", key="contact_email")
-st.text_area("Message", key="contact_message")
-st.button("Send Message", key="contact_send")
-
-
-# ... all previous sections: Skills, My Work, Mini-Games, Timeline, Analytics, Contact
-
+# CONTACT SECTION
 # -----------------------
-# Footer
-# -----------------------
-st.markdown("<br><br>", unsafe_allow_html=True)  # space before footer
+import requests
+import streamlit as st
+
+st.markdown("---")
+st.header("Let's Connect 🤝")
+st.write("Ask me about my work, services, or collaborations!")
+
+# --- Styling ---
 st.markdown("""
-<div style="
-    background-color:#121212;
-    color:#fff;
-    text-align:center;
-    padding:1rem;
-    font-size:0.9rem;
-    border-top:1px solid rgba(255,255,255,0.1);
-">
-    Built with ❤️ by <strong>Samuel Ekisa </strong>
+<style>
+div.stButton > button:first-child {
+    background-color: #ffffff;
+    color: #000;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 0.6rem 2rem;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease-in-out;
+}
+div.stButton > button:first-child:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+}
+textarea, input {
+    border-radius: 8px !important;
+}
+.contact-footer {
+    text-align: center;
+    color: #ccc;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+.contact-footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+.contact-footer a:hover {
+    color: #00aced;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- Formspree Endpoint ---
+FORM_ENDPOINT = "https://formspree.io/f/meopbnnk"
+
+# --- Contact Form ---
+with st.form("contact_form_v3", clear_on_submit=True):
+    name = st.text_input("Your Name")
+    email = st.text_input("Your Email")
+    message = st.text_area("Message", placeholder="Type your message here...")
+
+    submitted = st.form_submit_button("Send Message")
+
+    if submitted:
+        if not name or not email or not message:
+            st.warning("⚠️ Please fill in all fields before submitting.")
+        elif "@" not in email:
+            st.error("❌ Please enter a valid email address.")
+        else:
+            data = {"name": name, "email": email, "message": message}
+            try:
+                response = requests.post(FORM_ENDPOINT, data=data)
+                if response.status_code == 200:
+                    st.success(f"✅ Thank you {name}! Your message was sent successfully.")
+                    st.balloons()
+                else:
+                    st.error("⚠️ Something went wrong. Please try again later.")
+            except Exception:
+                st.error("⚠️ Could not send your message. Please check your connection.")
+
+# --- Contact Footer ---
+st.markdown("""
+<div class="contact-footer">
+    <p>📧 <b>Email:</b> <a href="mailto:samuelekisa@gmail.com">samuelekisa@gmail.com</a></p>
+    <p>
+        🌐 <a href="https://www.linkedin.com/in/samuelekisa" target="_blank">LinkedIn</a> |
+        🐙 <a href="https://github.com/Kidotih" target="_blank">GitHub</a> |
+        💼 <a href="https://twitter.com/samuelekisa" target="_blank">Twitter</a>
+    </p>
+    <p>⚙️ Built by <b>samuel</b></p>
 </div>
 """, unsafe_allow_html=True)
+
+# Footer end
+# -----------------------
 
