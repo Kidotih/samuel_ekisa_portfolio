@@ -8,48 +8,97 @@ import json
 from pathlib import Path
 import time
 
-# -----------------------
-# Timeline Rendering Function
-# -----------------------
-# -----------------------
-# Timeline Rendering Function (Compact Version)
-# -----------------------
-def render_timeline(experience_file):
-    if not experience_file.exists():
-        st.warning("Timeline file not found.")
-        return
+import streamlit as st
 
-    with open(experience_file) as f:
-        timeline = json.load(f)
+st.set_page_config(page_title="Samuel Ekisa | Portfolio", layout="wide")
 
-    st.markdown("<h2 style='text-align:center; color:white;'>Timeline & Experience</h2>", unsafe_allow_html=True)
-    st.markdown("<div style='position:relative; width:100%; margin-top:2rem;'>", unsafe_allow_html=True)
+# -----------------------------
+# FIXED WHITE NAVBAR
+# -----------------------------
+st.markdown("""
+<style>
+/* Reset default padding */
+[data-testid="stAppViewContainer"] > .main {
+    padding-top: 0rem;
+}
+[data-testid="stHeader"] {
+    background: rgba(0,0,0,0);
+}
+section[data-testid="stSidebar"] {
+    background-color: #fff;
+}
 
-    for idx, item in enumerate(timeline):
-        side = "left" if idx % 2 == 0 else "right"
-        st.markdown(f"""
-        <div style='width:45%; padding:1rem; background:#fff; color:#000; border-radius:10px; 
-                    position:relative; margin:1rem 0; float:{side}; box-shadow:0 2px 8px rgba(0,0,0,0.2);
-                    font-size:0.9rem;'>
-            <h4 style='margin:0 0 0.3rem 0;'>{item.get('role','')} @ {item.get('company','')}</h4>
-            <p style='margin:0 0 0.3rem 0; font-size:0.8rem; color:#555;'>{item.get('start','')} - {item.get('end','')}</p>
-            <p style='margin:0;'>{item.get('description','')}</p>
-            <div style='position:absolute; top:1rem; { "right:-10px" if side=="left" else "left:-10px" }; 
-                        width:20px; height:20px; background:#fff; border:3px solid #00BFFF; border-radius:50%;'></div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Center vertical line
-    st.markdown("""
-    <div style='position:absolute; left:50%; top:0; bottom:0; width:4px; background:#00BFFF; margin-left:-2px;'></div>
-    </div>
-    """, unsafe_allow_html=True)
+/* Navbar container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e0e0e0;
+  z-index: 9999;
+}
+
+/* Navbar links */
+.navbar a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.navbar a:hover {
+  color: #007bff;
+  transform: translateY(-2px);
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+</style>
+
+<div class="navbar">
+  <a href="#home">Home</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#contact">Contact</a>
+</div>
+st.markdown("""
+<script>
+document.querySelectorAll('.navbar a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop - 70,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+</script>
+""", unsafe_allow_html=True)
+
+""", unsafe_allow_html=True)
+
+# Prevent content from being hidden under navbar
+st.markdown("<div style='margin-top:80px;'></div>", unsafe_allow_html=True)
+
 
 
 # -----------------------
 # Page Configuration
 # -----------------------
-st.set_page_config(page_title="Samuel Ekisa Portfolio", layout="wide")
+
 
 # -----------------------
 # Base Paths
@@ -138,37 +187,228 @@ def animated_intro():
 animated_intro()
 
 
-# -----------------------
-# Skills Section (Interactive, Professional)
-# -----------------------
-st.header("Skills.")
 
-# Load skills from JSON
-if SKILLS_FILE.exists():
-    with open(SKILLS_FILE) as f:
-        skills = json.load(f)
-else:
-    skills = [
-        {"name": "Python", "level": 95, "description": "Automation, AI, backend systems.", "icon": "🐍"},
-        {"name": "JavaScript", "level": 75, "description": "Frontend interactivity, web apps.", "icon": "🟨"},
-        {"name": "Streamlit", "level": 85, "description": "Interactive dashboards and apps.", "icon": "💻"},
-        {"name": "Data Analysis", "level": 90, "description": "Pandas, NumPy, visualization.", "icon": "📊"},
-        {"name": "Problem Solving", "level": 100, "description": "Algorithms and critical thinking.", "icon": "🧠"},
-        {"name": "UI/UX Design", "level": 70, "description": "User-friendly interfaces.", "icon": "🎨"}
+# -----------------------
+# SKILLS SECTION — WHITE THEME + ANIMATED + TOOLTIP + SEO OPTIMIZED
+# -----------------------
+import streamlit as st
+st.markdown('<div id="skills"></div>', unsafe_allow_html=True)
+
+
+st.markdown("---")
+st.header("Skills & Expertise ⚙️")
+st.caption("Empowering ideas through automation, data, and intelligent design — with clean, modern engineering.")
+
+# --- Styling ---
+st.markdown("""
+<style>
+@keyframes fadeInUp {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+.category {
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease;
+}
+.category h3 {
+    color: #111;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.3rem;
+    letter-spacing: 0.5px;
+}
+.skill-box {
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 12px;
+    padding: 1rem 1.3rem;
+    margin-bottom: 0.9rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    animation: fadeInUp 1s ease;
+}
+.skill-box:hover {
+    background: #f9f9f9;
+    border-color: #ccc;
+    transform: translateX(5px);
+}
+.skill-name {
+    font-weight: 700;
+    color: #111;
+    font-size: 1.05rem;
+}
+.skill-note {
+    color: #444;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+.progress {
+    background-color: #eaeaea;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 8px;
+    margin-top: 0.5rem;
+}
+.progress-bar {
+    height: 8px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #007bff, #00bfff);
+    transition: width 1s ease;
+}
+.skill-tooltip {
+    display: inline-block;
+    position: relative;
+    cursor: help;
+}
+.skill-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 230px;
+    background: #111;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -115px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.skill-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- Skills Data ---
+categories = {
+    "⚙️ Programming & Development": [
+        {
+            "icon": "🐍",
+            "name": "Python",
+            "note": "Advanced Python for backend automation, AI integration, and scalable API systems using FastAPI, Flask, and Streamlit.",
+            "tooltip": "Expert in automation pipelines, backend design, and AI-driven Python development.",
+            "level": 95
+        },
+        {
+            "icon": "🟨",
+            "name": "JavaScript",
+            "note": "Modern JavaScript (ES6+) for dynamic web apps, frontend logic, and real-time interfaces.",
+            "tooltip": "Building interactive, API-powered experiences with asynchronous logic and clean UI structure.",
+            "level": 85
+        },
+        {
+            "icon": "💻",
+            "name": "Streamlit",
+            "note": "Building interactive dashboards, automation tools, and machine learning interfaces.",
+            "tooltip": "Expert in Streamlit app development for intelligent data-driven visualization.",
+            "level": 92
+        }
+    ],
+    "🤖 AI & Data Intelligence": [
+        {
+            "icon": "🧠",
+            "name": "Machine Learning",
+            "note": "Building predictive models, feature engineering, and deploying AI solutions using TensorFlow and Scikit-learn.",
+            "tooltip": "Proficient in ML model lifecycle — training, evaluation, deployment, and automation.",
+            "level": 88
+        },
+        {
+            "icon": "📊",
+            "name": "Data Visualization",
+            "note": "Transforming data into insights using Matplotlib, Plotly, and custom Streamlit visualizations.",
+            "tooltip": "Data storytelling for analytics and strategic decision-making.",
+            "level": 90
+        },
+        {
+            "icon": "🧮",
+            "name": "Data Engineering",
+            "note": "ETL pipelines, real-time data flow, and analytics optimization with SQL, Pandas, and cloud tools.",
+            "tooltip": "Designing scalable data pipelines for performance and accuracy.",
+            "level": 87
+        }
+    ],
+    "🎨 Frontend & Design Systems": [
+        {
+            "icon": "⚛️",
+            "name": "React (Basics)",
+            "note": "Building modular and interactive interfaces using React and component-based logic.",
+            "tooltip": "Crafting responsive and dynamic web layouts.",
+            "level": 75
+        },
+        {
+            "icon": "🎨",
+            "name": "UI/UX Design",
+            "note": "Designing human-centered, accessible, and visually consistent experiences.",
+            "tooltip": "Focus on clean aesthetics and modern design language.",
+            "level": 85
+        },
+        {
+            "icon": "🌐",
+            "name": "Web Fundamentals",
+            "note": "Responsive layouts using HTML5, CSS3, and SEO-optimized content structure.",
+            "tooltip": "Ensuring pixel-perfect, high-performance frontend delivery.",
+            "level": 88
+        }
+    ],
+    "☁️ Cloud, DevOps & Automation": [
+        {
+            "icon": "🔗",
+            "name": "Supabase / Firebase",
+            "note": "Integrating real-time databases, authentication, and cloud services for modern apps.",
+            "tooltip": "Building connected, secure, and scalable backend ecosystems.",
+            "level": 82
+        },
+        {
+            "icon": "🐳",
+            "name": "Docker",
+            "note": "Containerizing applications for deployment, scalability, and collaboration.",
+            "tooltip": "Efficient environment management for full-stack projects.",
+            "level": 80
+        },
+        {
+            "icon": "🧩",
+            "name": "Git & CI/CD",
+            "note": "Version control, workflow automation, and continuous deployment using GitHub Actions.",
+            "tooltip": "Streamlining collaboration and delivery pipelines.",
+            "level": 93
+        }
     ]
+}
 
-cols = st.columns(3)
+# --- Display Layout ---
+cols = st.columns(2)
+cat_names = list(categories.keys())
 
-for i, skill in enumerate(skills):
-    with cols[i % 3]:
-        # Skill header with icon and name
-        st.markdown(f"### {skill['icon']} {skill['name']}")
-        # Progress bar representing skill level
-        st.progress(skill['level'])
-        # Expandable description
-        with st.expander("Learn more"):
-            st.write(skill['description'])
-
+for i, col in enumerate(cols):
+    with col:
+        for cat in cat_names[i::2]:
+            st.markdown(f"<div class='category'><h3>{cat}</h3>", unsafe_allow_html=True)
+            for skill in categories[cat]:
+                progress_html = f"""
+                <div class="progress"><div class="progress-bar" style="width:{skill['level']}%"></div></div>
+                """
+                tooltip_html = f"""
+                <div class="skill-tooltip">
+                    <div class="skill-name">{skill['icon']} {skill['name']}</div>
+                    <div class="tooltip-text">{skill['tooltip']}</div>
+                </div>
+                """
+                st.markdown(f"""
+                <div class="skill-box">
+                    {tooltip_html}
+                    <div class="skill-note">{skill['note']}</div>
+                    {progress_html}
+                </div>
+                """, unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
 
 
 # MY WORK SECTION
@@ -176,6 +416,7 @@ for i, skill in enumerate(skills):
 import streamlit as st
 
 st.markdown("---")
+st.markdown('<div id="work"></div>', unsafe_allow_html=True)
 st.header("My Work 💼")
 st.write("I build systems that **automate**, **educate**, and **inspire** innovation.")
 
@@ -217,6 +458,9 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+
+
+
 
 # --- Work Showcase ---
 projects = [
@@ -291,6 +535,7 @@ st.markdown("---")
 # -----------------------
 # Timeline Section
 # -----------------------
+st.markdown('<div id="timeline"></div>', unsafe_allow_html=True)
 st.header("Timeline & Experience.")
 render_timeline(EXPERIENCE_FILE)
 st.markdown("---")
@@ -373,6 +618,8 @@ import requests
 import streamlit as st
 
 st.markdown("---")
+
+st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
 st.header("Let's Connect 🤝")
 st.write("Ask me about my work, services, or collaborations!")
 
