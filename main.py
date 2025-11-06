@@ -8,92 +8,6 @@ import json
 from pathlib import Path
 import time
 
-import streamlit as st
-
-st.set_page_config(page_title="Samuel Ekisa | Portfolio", layout="wide")
-
-# -----------------------------
-# FIXED WHITE NAVBAR
-# -----------------------------
-st.markdown("""
-<style>
-/* Reset default padding */
-[data-testid="stAppViewContainer"] > .main {
-    padding-top: 0rem;
-}
-[data-testid="stHeader"] {
-    background: rgba(0,0,0,0);
-}
-section[data-testid="stSidebar"] {
-    background-color: #fff;
-}
-
-/* Navbar container */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  padding: 14px 0;
-  border-bottom: 1px solid #e0e0e0;
-  z-index: 9999;
-}
-
-/* Navbar links */
-.navbar a {
-  color: #111;
-  text-decoration: none;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-.navbar a:hover {
-  color: #007bff;
-  transform: translateY(-2px);
-}
-
-/* Add smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-</style>
-
-<div class="navbar">
-  <a href="#home">Home</a>
-  <a href="#skills">Skills</a>
-  <a href="#projects">Projects</a>
-  <a href="#timeline">Timeline</a>
-  <a href="#contact">Contact</a>
-</div>
-st.markdown("""
-<script>
-document.querySelectorAll('.navbar a').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 70,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-</script>
-""", unsafe_allow_html=True)
-
-""", unsafe_allow_html=True)
-
-# Prevent content from being hidden under navbar
-st.markdown("<div style='margin-top:80px;'></div>", unsafe_allow_html=True)
-
-
 
 # -----------------------
 # Page Configuration
@@ -111,9 +25,6 @@ SKILLS_FILE = DATA_DIR / "skills.json"
 
 DATA_DIR = BASE_DIR / "data"    # not BASE_DIR.parent
 EXPERIENCE_FILE = DATA_DIR / "experience.json"
-
-
-
 
 
 # -----------------------
@@ -192,7 +103,7 @@ animated_intro()
 # SKILLS SECTION — WHITE THEME + ANIMATED + TOOLTIP + SEO OPTIMIZED
 # -----------------------
 import streamlit as st
-st.markdown('<div id="skills"></div>', unsafe_allow_html=True)
+
 
 
 st.markdown("---")
@@ -416,7 +327,6 @@ for i, col in enumerate(cols):
 import streamlit as st
 
 st.markdown("---")
-st.markdown('<div id="work"></div>', unsafe_allow_html=True)
 st.header("My Work 💼")
 st.write("I build systems that **automate**, **educate**, and **inspire** innovation.")
 
@@ -535,7 +445,7 @@ st.markdown("---")
 # -----------------------
 # Timeline Section
 # -----------------------
-st.markdown('<div id="timeline"></div>', unsafe_allow_html=True)
+
 st.header("Timeline & Experience.")
 render_timeline(EXPERIENCE_FILE)
 st.markdown("---")
@@ -619,7 +529,7 @@ import streamlit as st
 
 st.markdown("---")
 
-st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
+
 st.header("Let's Connect 🤝")
 st.write("Ask me about my work, services, or collaborations!")
 
