@@ -10,5 +10,11 @@ An **interactive developer portfolio** built with **Python** and **Streamlit**, 
 
 ---
 
+## 📊 Dashboard Preview
+
+![Dashboard Screenshot](assets/dashboard_preview.jpg)
+
+---
+
 ## 📂 Project Structure
 
