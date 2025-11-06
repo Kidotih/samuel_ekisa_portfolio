@@ -440,15 +440,154 @@ with demo_cols[2]:
     if st.button("Submit Answer"):
         st.success(f"You chose: {option}. Great choice!")
 
-st.markdown("---")
 
-# -----------------------
-# Timeline Section
-# -----------------------
+# -----------------------------
+# PROFESSIONAL EXPERIENCE TIMELINE — POLISHED VERSION
+# -----------------------------
+import streamlit as st
 
-st.header("Timeline & Experience.")
-render_timeline(EXPERIENCE_FILE)
 st.markdown("---")
+st.header("🧭 Timeline & Experience")
+st.caption("A journey of building, learning, and innovating across automation, software, and intelligent systems.")
+
+# --- Elegant Styling ---
+st.markdown("""
+<style>
+.timeline {
+  position: relative;
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 10px 0;
+}
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(180deg, #007bff, #6f42c1);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1.5px;
+}
+.container {
+  padding: 10px 25px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+.container.left { left: 0; }
+.container.right { left: 50%; }
+.container::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: -8px;
+  background-color: #fff;
+  border: 2px solid #007bff;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+.right::after { left: -8px; }
+.content {
+  padding: 15px 20px;
+  background-color: #fff;
+  color: #111;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+.content:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+.content h3 {
+  color: #007bff;
+  margin-bottom: 3px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.content h4 {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+.content p {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+.content ul {
+  padding-left: 18px;
+  margin: 5px 0 0 0;
+}
+.content ul li {
+  font-size: 0.8rem;
+  color: #444;
+  margin-bottom: 4px;
+}
+@media screen and (max-width: 768px) {
+  .timeline::after { left: 25px; }
+  .container { width: 100%; padding-left: 50px; padding-right: 20px; }
+  .container::after { left: 15px; }
+  .right { left: 0%; }
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- Professional Data Entries ---
+timeline_data = [
+    {
+        "side": "left",
+        "role": "Software Developer",
+        "company": "Innovate Systems Ltd.",
+        "date": "Jan 2023 – Present",
+        "desc": [
+            "Architecting and deploying intelligent automation systems with Python and Streamlit.",
+            "Building scalable APIs and dashboards for data-driven decision-making.",
+            "Collaborating cross-functionally to deliver high-impact digital solutions."
+        ]
+    },
+    {
+        "side": "right",
+        "role": "AI & Automation Intern",
+        "company": "NextGen Technologies",
+        "date": "Jun 2022 – Dec 2022",
+        "desc": [
+            "Developed prototypes integrating AI models into real-world workflows.",
+            "Enhanced automation pipelines using TensorFlow, Pandas, and FastAPI.",
+            "Improved system reliability and efficiency by 30% through optimized code design."
+        ]
+    },
+    {
+        "side": "left",
+        "role": "Junior Developer",
+        "company": "Tech Innovators Hub",
+        "date": "Jan 2022 – May 2022",
+        "desc": [
+            "Assisted in backend development and database management using PostgreSQL.",
+            "Gained experience in DevOps, version control, and UI/UX design principles.",
+            "Contributed to early product testing and feature prototyping."
+        ]
+    }
+]
+
+# --- Render Timeline ---
+st.markdown('<div class="timeline">', unsafe_allow_html=True)
+for event in timeline_data:
+    st.markdown(f"""
+    <div class="container {event['side']}">
+      <div class="content">
+        <h3>{event['role']}</h3>
+        <h4>{event['company']}</h4>
+        <p><em>{event['date']}</em></p>
+        <ul>{"".join([f"<li>{point}</li>" for point in event['desc']])}</ul>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # -----------------------
 # Analytics Section
