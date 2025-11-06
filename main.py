@@ -224,7 +224,7 @@ projects = [
         "title": "Automation System Dashboard",
         "desc": "A real-time Streamlit dashboard that automates workflows and reports for small businesses.",
         "tech": "Python, Streamlit, Supabase, REST APIs",
-        "link": "https://github.com/Kidotih/automation-dashboard"
+        "link": "https://github.com/Kidotih/dynamic-knowledge-dashboard"
     },
     {
         "title": "Learning Hub Platform",
