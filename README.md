@@ -5,8 +5,10 @@ An **interactive developer portfolio** built with **Python** and **Streamlit**, 
 ---
 
 ## 🚀 Live App
-🔗 **[View Portfolio](https://samuel-ekisa-portfolio.streamlit.app)**  
-(If not yet deployed, you can run it locally following the instructions below.)
+
+🔗 **[View Live Portfolio](https://samuel-ekisa-portfolio.streamlit.app)**  
+
+> A fully deployed Streamlit portfolio showcasing my data-driven projects, skills, and interactive dashboards — including the Dynamic Knowledge Dashboard.
 
 ---
 
