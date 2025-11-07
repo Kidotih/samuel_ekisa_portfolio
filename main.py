@@ -445,10 +445,6 @@ with demo_cols[2]:
         st.success(f"You chose: {option}. Great choice!")
 
 
-
-
-
-
 import streamlit as st
 
 st.markdown("---")
