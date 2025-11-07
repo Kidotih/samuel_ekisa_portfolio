@@ -322,6 +322,10 @@ for i, col in enumerate(cols):
             st.markdown("</div>", unsafe_allow_html=True)
 
 
+
+
+
+
 # MY WORK SECTION
 # -----------------------
 import streamlit as st
@@ -445,152 +449,188 @@ with demo_cols[2]:
 
 
 
-
-
-
-# -----------------------------
-# PROFESSIONAL EXPERIENCE TIMELINE — RESPONSIVE & POLISHED
-# -----------------------------
 import streamlit as st
 
 st.markdown("---")
-st.header("🧭 Timeline & Experience")
-st.caption("A journey of building, learning, and innovating across automation, software, and intelligent systems.")
-
-# --- CSS Styling for Timeline ---
-st.markdown("""
-<style>
-/* Base Timeline */
-.timeline {
-  position: relative;
-  max-width: 850px;
-  margin: 40px auto;
-  padding: 10px 0;
-}
-
-/* Vertical Line */
-.timeline::after {
-  content: '';
-  position: absolute;
-  width: 3px;
-  background: linear-gradient(180deg, #007bff, #6f42c1);
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  margin-left: -1.5px;
-}
-
-/* Container */
-.container {
-  padding: 10px 25px;
-  position: relative;
-  background-color: inherit;
-  width: 50%;
-}
-.container.left { left: 0; }
-.container.right { left: 50%; }
-
-/* Timeline Dots */
-.container::after {
-  content: '';
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  right: -8px;
-  background-color: #fff;
-  border: 2px solid #007bff;
-  top: 15px;
-  border-radius: 50%;
-  z-index: 1;
-}
-.right::after { left: -8px; }
-
-/* Content Styling */
-.content {
-  padding: 15px 20px;
-  background-color: #fff;
-  color: #111;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
-.content:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-}
-.content h3 { color: #007bff; margin-bottom: 3px; font-size: 1rem; font-weight: 700; }
-.content h4 { margin-bottom: 4px; font-size: 0.9rem; font-weight: 600; color: #333; }
-.content p { font-size: 0.85rem; color: #555; margin-bottom: 6px; }
-.content ul { padding-left: 18px; margin: 5px 0 0 0; }
-.content ul li { font-size: 0.8rem; color: #444; margin-bottom: 4px; }
-
-/* --- Mobile Responsiveness --- */
-@media screen and (max-width: 768px) {
-  .timeline::after { left: 20px; }
-  .container {
-    width: 100%;
-    padding-left: 50px;
-    padding-right: 20px;
-    left: 0 !important;
-    margin-bottom: 20px;
-  }
-  .container::after { left: 15px; right: auto; }
-  .right { left: 0 !important; }
-}
-</style>
-""", unsafe_allow_html=True)
+st.header(" Timeline & Experience🧭")
+st.caption("Select a company to reveal full experience details on the right. Scroll-free, interactive, professional design.")
 
 # --- Timeline Data ---
+
+# Example of updated skill_notes
 timeline_data = [
     {
-        "side": "left",
-        "role": "Software Developer",
         "company": "Innovate Systems Ltd.",
+        "role": "Software Developer",
         "date": "Jan 2023 – Present",
         "desc": [
             "Architecting and deploying intelligent automation systems with Python and Streamlit.",
             "Building scalable APIs and dashboards for data-driven decision-making.",
             "Collaborating cross-functionally to deliver high-impact digital solutions."
-        ]
+        ],
+        "skill_note": "🚀 Automating workflows & building intelligent APIs with Python & Streamlit"
     },
     {
-        "side": "right",
-        "role": "AI & Automation Intern",
         "company": "NextGen Technologies",
+        "role": "AI & Automation Intern",
         "date": "Jun 2022 – Dec 2022",
         "desc": [
             "Developed prototypes integrating AI models into real-world workflows.",
             "Enhanced automation pipelines using TensorFlow, Pandas, and FastAPI.",
             "Improved system reliability and efficiency by 30% through optimized code design."
-        ]
+        ],
+        "skill_note": "🤖 Prototyping AI-driven automation that boosts efficiency"
     },
     {
-        "side": "left",
-        "role": "Junior Developer",
         "company": "Tech Innovators Hub",
+        "role": "Junior Developer",
         "date": "Jan 2022 – May 2022",
         "desc": [
             "Assisted in backend development and database management using PostgreSQL.",
             "Gained experience in DevOps, version control, and UI/UX design principles.",
             "Contributed to early product testing and feature prototyping."
-        ]
+        ],
+        "skill_note": "💡 Building foundations in backend dev, DevOps & UI/UX"
     }
 ]
 
-# --- Render Timeline ---
-st.markdown('<div class="timeline">', unsafe_allow_html=True)
-for event in timeline_data:
+# --- CSS for premium timeline design ---
+st.markdown("""
+<style>
+/* Timeline container */
+.timeline-wrapper {
+    display: flex;
+    max-width: 900px;
+    margin: 40px auto;
+    font-family: sans-serif;
+}
+
+/* Left column: timeline line and companies */
+.timeline-left {
+    flex: 1;
+    position: relative;
+    padding-right: 20px;
+}
+.timeline-left::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #007bff, #6f42c1);
+    border-radius: 2px;
+}
+
+/* Dot for each company */
+.timeline-left p {
+    position: relative;
+    margin: 40px 0;
+    padding-left: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #007bff;
+}
+.timeline-left p::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 3px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border: 3px solid #007bff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+}
+
+/* Right column: details card */
+.timeline-right {
+    flex: 2;
+    padding-left: 30px;
+    min-height: 300px;
+    position: relative;
+}
+.timeline-card {
+    background: linear-gradient(145deg, #ffffff, #f0f0f8);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+.timeline-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.timeline-card h3 {
+    margin: 0 0 5px 0;
+    color: #007bff;
+    font-size: 1.1rem;
+}
+.timeline-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.95rem;
+    color: #333;
+}
+.timeline-card p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+.timeline-card ul {
+    padding-left: 18px;
+    margin: 5px 0 0 0;
+}
+.timeline-card ul li {
+    margin-bottom: 5px;
+    font-size: 0.82rem;
+    color: #444;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+    .timeline-wrapper {
+        flex-direction: column;
+    }
+    .timeline-left::before {
+        left: 10px;
+    }
+    .timeline-left p::before {
+        left: -5px;
+    }
+    .timeline-right {
+        padding-left: 15px;
+        margin-top: 20px;
+    }
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- Layout: two columns ---
+col1, col2 = st.columns([1, 2])
+
+with col1:
+    st.markdown("**Companies & Key Skills:**")
+    selected_company = st.radio(
+        "Select a company to reveal details",
+        [item["company"] for item in timeline_data],
+        index=0
+    )
+    for item in timeline_data:
+        st.markdown(f"* {item['skill_note']}")
+
+with col2:
+    selected = next(item for item in timeline_data if item["company"] == selected_company)
     st.markdown(f"""
-    <div class="container {event['side']}">
-      <div class="content">
-        <h3>{event['role']}</h3>
-        <h4>{event['company']}</h4>
-        <p><em>{event['date']}</em></p>
-        <ul>{"".join([f"<li>{point}</li>" for point in event['desc']])}</ul>
-      </div>
+    <div class="timeline-card">
+        <h3>{selected['role']}</h3>
+        <h4>{selected['company']}</h4>
+        <p><em>{selected['date']}</em></p>
+        <ul>
+            {"".join([f"<li>{point}</li>" for point in selected['desc']])}
+        </ul>
     </div>
     """, unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
 
 
 # -----------------------
