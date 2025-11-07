@@ -9,6 +9,50 @@ from pathlib import Path
 import time
 
 
+
+# -----------------------
+# Navigation Bar
+# -----------------------
+st.markdown("""
+<style>
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: rgba(255,255,255,0.9); /* Light transparent background */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    border-bottom: 1px solid #ddd;
+    backdrop-filter: blur(5px); /* subtle blur effect */
+}
+.navbar a {
+    color: #007bff; /* clean blue for links */
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.navbar a:hover {
+    color: #6f42c1;
+}
+@media screen and (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
+<div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#skills">Skills</a>
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+</div>
+""", unsafe_allow_html=True)
+
+
 # -----------------------
 # Page Configuration
 # -----------------------
@@ -51,12 +95,21 @@ dark_mode = st.sidebar.checkbox("Dark Mode", value=True)
 bg_color = "#121212" if dark_mode else "#FFF"
 text_color = "#FFF" if dark_mode else "#000"
 
+
 st.markdown(f"""
 <style>
-    body {{ background-color:{bg_color}; color:{text_color}; }}
-    button:hover {{ transform:scale(1.05); transition:0.3s; }}
+    body {{
+        background-color:{bg_color};
+        color:{text_color};
+        scroll-behavior: smooth; /* <-- enables smooth scrolling */
+    }}
+    button:hover {{
+        transform:scale(1.05);
+        transition:0.3s;
+    }}
 </style>
 """, unsafe_allow_html=True)
+
 
 # -----------------------
 # Section Anchors
@@ -107,6 +160,8 @@ import streamlit as st
 
 
 st.markdown("---")
+st.markdown('<div id="skills"></div>', unsafe_allow_html=True)
+
 st.header("Skills & Expertise ⚙️")
 st.caption("Empowering ideas through automation, data, and intelligent design — with clean, modern engineering.")
 
@@ -331,6 +386,8 @@ for i, col in enumerate(cols):
 import streamlit as st
 
 st.markdown("---")
+st.markdown('<div id="work"></div>', unsafe_allow_html=True)
+
 st.header("My Work 💼")
 st.write("I build systems that **automate**, **educate**, and **inspire** innovation.")
 
@@ -448,6 +505,8 @@ with demo_cols[2]:
 import streamlit as st
 
 st.markdown("---")
+st.markdown('<div id="experience"></div>', unsafe_allow_html=True)
+
 st.header(" Timeline & Experience🧭")
 st.caption("Select a company to reveal full experience details on the right. Scroll-free, interactive, professional design.")
 
@@ -640,6 +699,8 @@ import streamlit as st
 import time
 
 st.markdown("---")
+
+
 st.header("Stats & Achievements.")
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -705,9 +766,8 @@ for placeholder, target_value, icon, label in placeholders:
 # -----------------------
 import requests
 import streamlit as st
-
 st.markdown("---")
-
+st.markdown('<div id="contact"></div>', unsafe_allow_html=True)
 
 st.header("Let's Connect 🤝")
 st.write("Ask me about my work, services, or collaborations!")
