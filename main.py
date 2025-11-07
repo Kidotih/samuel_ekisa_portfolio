@@ -441,8 +441,15 @@ with demo_cols[2]:
         st.success(f"You chose: {option}. Great choice!")
 
 
+
+
+
+
+
+
+
 # -----------------------------
-# PROFESSIONAL EXPERIENCE TIMELINE — POLISHED VERSION
+# PROFESSIONAL EXPERIENCE TIMELINE — RESPONSIVE & POLISHED
 # -----------------------------
 import streamlit as st
 
@@ -450,15 +457,18 @@ st.markdown("---")
 st.header("🧭 Timeline & Experience")
 st.caption("A journey of building, learning, and innovating across automation, software, and intelligent systems.")
 
-# --- Elegant Styling ---
+# --- CSS Styling for Timeline ---
 st.markdown("""
 <style>
+/* Base Timeline */
 .timeline {
   position: relative;
   max-width: 850px;
   margin: 40px auto;
   padding: 10px 0;
 }
+
+/* Vertical Line */
 .timeline::after {
   content: '';
   position: absolute;
@@ -469,6 +479,8 @@ st.markdown("""
   left: 50%;
   margin-left: -1.5px;
 }
+
+/* Container */
 .container {
   padding: 10px 25px;
   position: relative;
@@ -477,6 +489,8 @@ st.markdown("""
 }
 .container.left { left: 0; }
 .container.right { left: 50%; }
+
+/* Timeline Dots */
 .container::after {
   content: '';
   position: absolute;
@@ -490,6 +504,8 @@ st.markdown("""
   z-index: 1;
 }
 .right::after { left: -8px; }
+
+/* Content Styling */
 .content {
   padding: 15px 20px;
   background-color: #fff;
@@ -502,42 +518,29 @@ st.markdown("""
   transform: translateY(-3px);
   box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
-.content h3 {
-  color: #007bff;
-  margin-bottom: 3px;
-  font-size: 1rem;
-  font-weight: 700;
-}
-.content h4 {
-  margin-bottom: 4px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #333;
-}
-.content p {
-  font-size: 0.85rem;
-  color: #555;
-  margin-bottom: 6px;
-}
-.content ul {
-  padding-left: 18px;
-  margin: 5px 0 0 0;
-}
-.content ul li {
-  font-size: 0.8rem;
-  color: #444;
-  margin-bottom: 4px;
-}
+.content h3 { color: #007bff; margin-bottom: 3px; font-size: 1rem; font-weight: 700; }
+.content h4 { margin-bottom: 4px; font-size: 0.9rem; font-weight: 600; color: #333; }
+.content p { font-size: 0.85rem; color: #555; margin-bottom: 6px; }
+.content ul { padding-left: 18px; margin: 5px 0 0 0; }
+.content ul li { font-size: 0.8rem; color: #444; margin-bottom: 4px; }
+
+/* --- Mobile Responsiveness --- */
 @media screen and (max-width: 768px) {
-  .timeline::after { left: 25px; }
-  .container { width: 100%; padding-left: 50px; padding-right: 20px; }
-  .container::after { left: 15px; }
-  .right { left: 0%; }
+  .timeline::after { left: 20px; }
+  .container {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 20px;
+    left: 0 !important;
+    margin-bottom: 20px;
+  }
+  .container::after { left: 15px; right: auto; }
+  .right { left: 0 !important; }
 }
 </style>
 """, unsafe_allow_html=True)
 
-# --- Professional Data Entries ---
+# --- Timeline Data ---
 timeline_data = [
     {
         "side": "left",
@@ -588,6 +591,7 @@ for event in timeline_data:
     </div>
     """, unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
+
 
 # -----------------------
 # Analytics Section
